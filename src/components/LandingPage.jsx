@@ -1,17 +1,15 @@
 import Login from "./Login";
-
+import Logout from "./Logout";
 export default function LandingPage({ signIn, provider, session }) {
   return (
     <>
       {!session ? (
         <div>
-        not logged in
         <Login session={session} signIn={signIn} provider={provider} />
         </div>
       ) : (
         <div>
-          logged in
-          <button>log out </button>
+          <Logout>log out </Logout>
         </div>
       )}
     </>
