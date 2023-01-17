@@ -3,7 +3,7 @@ import {
     getProviders,
     useSession,
   } from 'next-auth/react';
-  import Login from '../../components/Login';
+  import LandingPage from '../../components/LandingPage';
   import Head from 'next/head'
   const Signin = ({ providers }) => {
     const { data: session } = useSession();
@@ -15,7 +15,7 @@ import {
         {providers &&
           Object.values(providers).map((provider) => (
             <div key={provider.name} style={{ marginBottom: 0 }}>
-              <Login
+              <LandingPage
                 session={session}
                 signIn={signIn}
                 provider={provider}
