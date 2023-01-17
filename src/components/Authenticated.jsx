@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 export default function Authenticated({ email }) {
   const [handle, setHandle] = useState("");
   const [loading, setLoading] = useState(false);
+  const [navigating, setNavigating] = useState(false);
   const [eligible, setEligibility] = useState("not checked");
   const owner = "galaxy-bytes";
   const repo = "maintainers";
@@ -33,6 +34,11 @@ export default function Authenticated({ email }) {
     }
   };
 
+  const sendToMaintainerRepo = async () => {
+    setNavigating(true);
+    return location.href = "https://github.com/community/maintainers";
+  };
+
   const showSelectedOption = () => {
     switch (eligible) {
       case "not checked":
@@ -43,6 +49,7 @@ export default function Authenticated({ email }) {
               <CTABanner.Description>
                 To join the maintainers repository, you must be a maintainer of
                 an active repository.
+                <br />
                 <Link href="https://github.com/logout" underline>
                   Not you? Sign out of GitHub and try again
                 </Link>
@@ -62,7 +69,7 @@ export default function Authenticated({ email }) {
         );
       case "eligible":
         return (
-          <div>
+            <div>
             <CTABanner hasShadow={false} align="center" hasBackground={false}>
               <CTABanner.Heading>
                 You&apos;ve been invited
@@ -72,6 +79,16 @@ export default function Authenticated({ email }) {
                 repository or click the button below! You&apos;ll have 7 days to
                 accept the invitation and join the Maintainer Community.
               </CTABanner.Description>
+              <CTABanner.ButtonGroup>
+                <Button
+                  disabled={navigating}
+                  onClick={(e) => {
+                    sendToMaintainerRepo(e);
+                  }}
+                >
+                  {navigating ? "Navigating..." : "Maintainer Repo"}
+                </Button>
+              </CTABanner.ButtonGroup>
             </CTABanner>
           </div>
         );
