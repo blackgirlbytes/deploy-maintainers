@@ -1,5 +1,6 @@
 import { signIn } from "next-auth/react";
 import { CTABanner, Button } from "@primer/react-brand";
+import React, {useState} from "react";
 
 export default function Login({ provider }) {
   const [loading, setLoading] = useState(false);
