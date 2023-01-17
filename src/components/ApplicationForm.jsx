@@ -7,7 +7,6 @@ import {
   } from "@primer/react-brand";
   import { Box, Textarea } from "@primer/react";
   import { useState } from "react";
-  import { openIssue } from "../pages/api/repoActions";
   import { signOut } from "next-auth/react";
   
   export const ApplicationForm = ({ owner, repo, username }) => {
@@ -17,11 +16,21 @@ import {
     const [thankYouMsg, setThankYouMsg] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [loggingOut, setLogOut] = useState(false);
+
+    const openIssue = async (username, reason, repoName) => {
+      const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: username, reason: reason, repoName: repoName, repoURL: repoURL })
+    };
+    const response = await fetch('/api/openIssue', requestOptions);
+    const data = await response.json();
+    }
   
     const handleSubmitToAppealRejection = async (event) => {
       event.preventDefault();
       setSubmitting(true);
-      await openIssue(owner, repo, username, repoName, repoURL, reason);
+      await openIssue(username, reason, repoName, repoURL);
       await setThankYouMsg(true);
     };
   

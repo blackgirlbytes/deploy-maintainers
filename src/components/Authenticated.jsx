@@ -2,7 +2,6 @@ import { CTABanner, Button } from "@primer/react-brand";
 import { Link } from "@primer/react";
 import { getUserHandleByEmail } from "../pages/api/dataRetrieval";
 import { isUserEligible } from "../pages/api/checkRequirements";
-import { inviteUser } from "../pages/api/repoActions";
 import { useState, useEffect } from "react";
 import ApplicationForm from "./ApplicationForm";
 
@@ -11,10 +10,11 @@ export default function Authenticated({ email }) {
   const [loading, setLoading] = useState(false);
   const [navigating, setNavigating] = useState(false);
   const [eligible, setEligibility] = useState("not checked");
-  const owner = "galaxy-bytes";
-  const repo = "maintainers";
+
   const ownerForIssueRepo = "rizel-test-user"
   const issueRepo = "test"
+
+  
   useEffect(() => {
     const getUsername = async (email) => {
       const handle = await getUserHandleByEmail(email);
@@ -23,13 +23,23 @@ export default function Authenticated({ email }) {
     getUsername(email);
   }, [email]);
 
+  const inviteUser = async (handle) => {
+    const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: handle })
+  };
+  const response = await fetch('/api/inviteUser', requestOptions);
+  const data = await response.json();
+}
+
   const isEligible = async (e) => {
     e.preventDefault();
     setLoading(true);
     const shouldSendInvite = await isUserEligible(handle);
     if (shouldSendInvite) {
       setEligibility("eligible");
-      await inviteUser(handle, owner, repo);
+      await inviteUser(handle);
     } else {
       setEligibility("not eligible");
     }
@@ -96,7 +106,7 @@ export default function Authenticated({ email }) {
         case "not eligible":
             return (
               <div>
-                <ApplicationForm owner={ownerForIssueRepo} repo={issueRepo} username={handle} />{" "}
+                <ApplicationForm username={handle} />{" "}
               </div>
             );
     }
