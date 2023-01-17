@@ -4,7 +4,6 @@ import { CTABanner, Button } from "@primer/react-brand";
 export default function Login() {
     const oauthFlow = (e) => {
         e.preventDefault() 
-        setLoading(true)
         signIn(provider.id)
       }
   return (
