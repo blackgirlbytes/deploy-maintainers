@@ -13,7 +13,7 @@ export default function Login() {
           source community.
         </CTABanner.Description>
         <CTABanner.ButtonGroup>
-          <Button >
+          <Button onClick={()=>console.log("Clicked!")} >
             {"Login with GitHub"}
           </Button>
         </CTABanner.ButtonGroup>
