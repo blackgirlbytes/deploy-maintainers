@@ -126,7 +126,7 @@ import {
     const hubberEligibility = isHubber;
     const isEligible = hubberEligibility || nonStaffEligibility;
   
-    return isEligible;
+    return false;
   };
   
   // if check eligibility for one of top 3 starred repos is true, then user is eligible

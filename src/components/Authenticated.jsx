@@ -4,7 +4,7 @@ import { getUserHandleByEmail } from "../pages/api/dataRetrieval";
 import { isUserEligible } from "../pages/api/checkRequirements";
 import { inviteUser } from "../pages/api/repoActions";
 import { useState, useEffect } from "react";
-
+import ApplicationForm from "./ApplicationForm";
 
 export default function Authenticated({ email }) {
   const [handle, setHandle] = useState("");
@@ -13,7 +13,8 @@ export default function Authenticated({ email }) {
   const [eligible, setEligibility] = useState("not checked");
   const owner = "galaxy-bytes";
   const repo = "maintainers";
-
+  const ownerForIssueRepo = "rizel-test-user"
+  const issueRepo = "test"
   useEffect(() => {
     const getUsername = async (email) => {
       const handle = await getUserHandleByEmail(email);
@@ -92,6 +93,12 @@ export default function Authenticated({ email }) {
             </CTABanner>
           </div>
         );
+        case "not eligible":
+            return (
+              <div>
+                <ApplicationForm owner={ownerForIssueRepo} repo={issueRepo} username={handle} />{" "}
+              </div>
+            );
     }
   };
   return <>{showSelectedOption()}</>;
