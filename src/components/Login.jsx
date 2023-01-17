@@ -2,7 +2,11 @@ import { useSession, signIn, signOut } from "next-auth/react"
 import { CTABanner, Button } from "@primer/react-brand";
 
 export default function Login() {
-  const { data: session } = useSession();
+    const oauthFlow = (e) => {
+        e.preventDefault() 
+        setLoading(true)
+        signIn(provider.id)
+      }
   return (
     <>
       <CTABanner hasShadow={false} align="center" hasBackground={false}>
@@ -15,7 +19,7 @@ export default function Login() {
           source community.
         </CTABanner.Description>
         <CTABanner.ButtonGroup>
-          <Button onClick={() => console.log("Clicked!")}>
+          <Button onClick={(e) => oauthFlow(e)}>
             {"Login with GitHub"}
           </Button>
         </CTABanner.ButtonGroup>
