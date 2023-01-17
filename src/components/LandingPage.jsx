@@ -1,6 +1,6 @@
+import Authenticated from "./Authenticated";
 import AuthenticatedNavBar from "./AuthenticatedNavBar";
 import Login from "./Login";
-import Logout from "./Logout";
 import NonAuthenticatedNavBar from "./NonAuthenticatedNavBar";
 export default function LandingPage({ signIn, provider, session }) {
   return (
@@ -13,6 +13,7 @@ export default function LandingPage({ signIn, provider, session }) {
       ) : (
         <div>
           <AuthenticatedNavBar />
+          <Authenticated email={session.user.email}/>
         </div>
       )}
     </>
