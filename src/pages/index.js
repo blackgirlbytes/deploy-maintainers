@@ -1,13 +1,7 @@
 import Head from 'next/head'
 import Login from '../components/Login'
-import {
-  signIn,
-  getProviders,
-  useSession,
-} from "next-auth/react";
 
-export default function Home({ providers }) {
-  const { data: session } = useSession();
+export default function Home() {
   return (
     <>
       <Head>
@@ -16,24 +10,7 @@ export default function Home({ providers }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {providers &&
-        Object.values(providers).map((provider) => (
-          <div key={provider.name} style={{ marginBottom: 0 }}>
-            <Login
-              session={session}
-              signIn={signIn}
-              provider={provider}
-            />
-          </div>
-        ))}
+      <Login />
     </>
   )
-}
-export async function getServerSideProps(context) {
-  const providers = await getProviders();
-  return {
-    props: {
-      providers,
-    },
-  };
 }
