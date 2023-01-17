@@ -1,7 +1,7 @@
 import { useSession, signIn, signOut } from "next-auth/react"
 import { CTABanner, Button } from "@primer/react-brand";
 
-export default function Login() {
+export default function Login({provider}) {
     const oauthFlow = (e) => {
         e.preventDefault() 
         signIn(provider.id)
