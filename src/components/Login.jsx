@@ -1,11 +1,13 @@
-import { signIn } from "next-auth/react"
+import { signIn } from "next-auth/react";
 import { CTABanner, Button } from "@primer/react-brand";
 
-export default function Login({provider}) {
-    const oauthFlow = (e) => {
-        e.preventDefault() 
-        signIn(provider.id)
-      }
+export default function Login({ provider }) {
+  const [loading, setLoading] = useState(false);
+  const oauthFlow = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    signIn(provider.id);
+  };
   return (
     <>
       <CTABanner hasShadow={false} align="center" hasBackground={false}>
@@ -18,8 +20,8 @@ export default function Login({provider}) {
           source community.
         </CTABanner.Description>
         <CTABanner.ButtonGroup>
-          <Button onClick={(e) => oauthFlow(e)}>
-            {"Login with GitHub"}
+          <Button disabled={loading} onClick={(e) => oauthFlow(e)}>
+            {loading ? "Loading..." : "Login with GitHub"}
           </Button>
         </CTABanner.ButtonGroup>
       </CTABanner>
