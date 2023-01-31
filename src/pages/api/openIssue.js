@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     authStrategy: createAppAuth,
     auth: {
       appId: process.env.APP_ID,
-      privateKey:process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
+      privateKey:process.env.PRIVATE_KEY,
       oauth: {
         clientId: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
