@@ -29,8 +29,7 @@ export default function Authenticated({ email }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: handle })
   };
-  const response = await fetch('/api/inviteUser', requestOptions);
-  const data = await response.json();
+  const response = await fetch('/api/inviteUser', requestOptions); 
 }
 
   const isEligible = async (e) => {
