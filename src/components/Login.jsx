@@ -13,12 +13,10 @@ export default function Login({ provider }) {
     <>
       <CTABanner hasShadow={false} align="center" hasBackground={false}>
         <CTABanner.Heading>
-          Join GitHub’s Maintainer Community!
+          Invite to Galaxy Bytes!
         </CTABanner.Heading>
         <CTABanner.Description>
-          The Maintainer Community is a private space for maintainers to connect
-          with peers, preview GitHub features, and help us support the open
-          source community.
+          A demo repository to learn how to use GitHub Copilot.
         </CTABanner.Description>
         <CTABanner.ButtonGroup>
           <Button disabled={loading} onClick={(e) => oauthFlow(e)}>
